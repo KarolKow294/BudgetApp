@@ -1,0 +1,6 @@
+bin/
+obj/
+plan/
+users.xml
+incomes.xml
+expenses.xml

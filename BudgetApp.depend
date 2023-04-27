@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1682366510 source:d:\repos\budgetapp\markup.cpp
+	<stdio.h>
+	"Markup.h"
+	<errno.h>
+	<iconv.h>
+	<windows.h>
+	<mbstring.h>
+
+1682365892 d:\repos\budgetapp\markup.h
+	<stdlib.h>
+	<string.h>
+	<string>
+	<afx.h>
+
+1682368057 source:d:\repos\budgetapp\main.cpp
+	<iostream>
+	<windows.h>
+	<winbase.h>
+	"Markup.h"
+
