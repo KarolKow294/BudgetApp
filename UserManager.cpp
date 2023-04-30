@@ -44,7 +44,7 @@ void UserManager::registerUser() {
     User user = getNewUserData();
 
     users.push_back(user);
-    //plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
+    fileWithUsers.addUserToFile(user);
 
     cout << endl << "Konto zalozono pomyslnie" << endl << endl;
     system("pause");
@@ -67,8 +67,6 @@ void UserManager::logInUser() {
                 {
                     loggedInUserId = v.getId();
                     cout << endl << "Zalogowales sie." << endl << endl;
-                    //Test
-                    cout << v.getId() << v.getName() << v.getSurname() << v.getLogin() << v.getPassword();
 
                     system("pause");
                     return;
@@ -93,11 +91,13 @@ void UserManager::changeLoggedInUserPassword() {
     for (auto& v : users) {
         if (v.getId() == loggedInUserId) {
             v.setPassword(newPassword);
+            fileWithUsers.saveChangedUserPasswordToFile(v);
+
             cout << "Haslo zostalo zmienione." << endl << endl;
             system("pause");
+            return;
         }
     }
-    //plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
 }
 
 bool UserManager::checkIfUserIsLoggedIn() {

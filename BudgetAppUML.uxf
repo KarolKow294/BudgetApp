@@ -141,15 +141,14 @@ _+ checkIfFirstDateIsOlder() : Bool_</panel_attributes>
       <x>1200</x>
       <y>690</y>
       <w>180</w>
-      <h>110</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>XmlFile
 --
 - FILE_NAME : String
 --
 + XmlFile()
-+ getFileName() : String
-+ IsTheFileEmpty() : Bool
++ isFileEmpty() : Bool
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -195,7 +194,7 @@ _+ checkIfFirstDateIsOlder() : Bool_</panel_attributes>
 + FileWithUsers()
 - getUserData() : User
 + addUserToFile() : void
-+ loadUserFromFile() : vector &lt;User&gt;
++ loadUsersFromFile() : vector &lt;User&gt;
 + saveAllUsersToFile() : void</panel_attributes>
     <additional_attributes/>
   </element>
@@ -412,23 +411,23 @@ fg=BLACK</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1210</x>
-      <y>790</y>
+      <y>770</y>
       <w>30</w>
-      <h>390</h>
+      <h>410</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;370.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;390.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>790</y>
+      <y>770</y>
       <w>950</w>
-      <h>780</h>
+      <h>800</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>930.0;10.0;930.0;760.0;10.0;760.0;10.0;470.0</additional_attributes>
+    <additional_attributes>930.0;10.0;930.0;780.0;10.0;780.0;10.0;490.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

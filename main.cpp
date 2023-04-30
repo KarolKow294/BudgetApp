@@ -3,7 +3,6 @@
 #include <winbase.h>
 #include <time.h>
 
-#include "Markup.h"
 #include "BudgetApp.h"
 
 using namespace std;
@@ -44,7 +43,7 @@ bool checkIfTheFirstDateIsOlder(Date firstDate, Date secondDate) {
 
 int main()
 {
-    BudgetApp budgetApp;
+    BudgetApp budgetApp("Users.xml");
     //"Users.xml", "Incomes.xml", "Expenses.xml"
 
     while (true)

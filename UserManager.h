@@ -3,12 +3,9 @@
 
 #include <iostream>
 #include <vector>
-//#include <windows.h>
-//#include <fstream>
-//#include <sstream>
 
 #include "User.h"
-//#include "FileWithUsers.h"
+#include "FileWithUsers.h"
 #include "AuxiliaryMethods.h"
 
 using namespace std;
@@ -16,17 +13,17 @@ using namespace std;
 class UserManager {
     int loggedInUserId;
     vector <User> users;
-    //FileWithUsers fileWithUsers;
+    FileWithUsers fileWithUsers;
 
     User getNewUserData();
     int getNewUserId();
     bool ifLoginExist(string login);
 
 public:
-    UserManager(/*string fileNameWithUsers) : fileWithUsers(fileNameWithUsers*/)
+    UserManager(string fileNameWithUsers) : fileWithUsers(fileNameWithUsers)
     {
         loggedInUserId = 0;
-        //users = fileWithUsers.loadUsersFromFile();
+        users = fileWithUsers.loadUsersFromFile();
     };
 
     void registerUser();
