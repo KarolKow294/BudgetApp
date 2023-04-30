@@ -219,7 +219,7 @@
 </node>
 </node>
 <node CREATED="1682453076861" ID="ID_1418403092" MODIFIED="1682453078955" TEXT="Nie">
-<node CREATED="1682453102801" ID="ID_1920476246" MODIFIED="1682453135129" TEXT="Informacja: U&#x17c;ytkownik o tym loginie nie isnieje. Wpisz ponownie."/>
+<node CREATED="1682453102801" ID="ID_1920476246" MODIFIED="1682879694124" TEXT="Informacja: U&#x17c;ytkownik o tym loginie nie isnieje."/>
 </node>
 </node>
 </node>

@@ -3,7 +3,7 @@
 #include <winbase.h>
 #include <time.h>
 
-#include "Markup.h"
+#include "BudgetApp.h"
 
 using namespace std;
 
@@ -43,7 +43,22 @@ bool checkIfTheFirstDateIsOlder(Date firstDate, Date secondDate) {
 
 int main()
 {
-    //pobranie aktualnej daty
+    BudgetApp budgetApp("Users.xml");
+    //"Users.xml", "Incomes.xml", "Expenses.xml"
+
+    while (true)
+    {
+        if (!budgetApp.checkIfUserIsLoggedIn())
+        {
+            budgetApp.selectOptionFromMainMenu();
+        }
+        else
+        {
+            budgetApp.selectOptionFromUserMenu();
+        }
+    }
+
+    /*//pobranie aktualnej daty
     int year, month, day;
 
     SYSTEMTIME st;
@@ -104,7 +119,7 @@ int main()
 
 
     CMarkup xml;
-    /*
+
     bool fileExists = xml.Load( "users.xml" );
 
     if (!fileExists)
@@ -122,7 +137,6 @@ int main()
     xml.AddElem("Password", "789");
 
     xml.Save("users.xml");
-    */
 
     bool fileExists = xml.Load( "incomes.xml" );
 
@@ -146,7 +160,7 @@ int main()
 
     cout << year1 << "-" << month1 << "-" << day1;
 
-    /*xml.AddElem("Year", year);
+    xml.AddElem("Year", year);
     xml.AddElem("Month", month);
     xml.AddElem("Day", day);
     xml.OutOfElem();
