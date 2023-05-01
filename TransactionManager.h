@@ -21,16 +21,18 @@ class TransactionManager {
     FileWithExpenses fileWithExpenses;
 
     Income getNewIncomeData();
+    Expense getNewExpenseData();
 
 public:
     TransactionManager(string fileNameWithIncomes, string fileNameWithExpenses, int idOfLoggedInUser)
         : fileWithIncomes(fileNameWithIncomes), fileWithExpenses(fileNameWithExpenses), ID_OF_LOGGED_IN_USER(idOfLoggedInUser)
     {
         incomes = fileWithIncomes.loadLoggedUserIncomesFromFile(ID_OF_LOGGED_IN_USER);
-        //expenses = fileWithExpenses.loadLoggedUserExpensesFromFile(ID_OF_LOGGED_IN_USER);
+        expenses = fileWithExpenses.loadLoggedUserExpensesFromFile(ID_OF_LOGGED_IN_USER);
     };
 
     void addIncome();
+    void addExpense();
 };
 
 #endif
