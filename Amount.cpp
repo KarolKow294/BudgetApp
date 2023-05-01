@@ -9,8 +9,8 @@ void Amount::setUserId(int newUserId) {
     userId = newUserId;
 }
 
-void Amount::setData(int newData) {
-    data = newData;
+void Amount::setDate(int newDate) {
+    date = newDate;
 }
 
 void Amount::setItem(string newItem) {
@@ -29,8 +29,8 @@ int Amount::getUserId() {
     return userId;
 }
 
-int Amount::getData() {
-    return data;
+int Amount::getDate() {
+    return date;
 }
 
 string Amount::getItem() {

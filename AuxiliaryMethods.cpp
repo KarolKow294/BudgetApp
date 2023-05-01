@@ -75,23 +75,39 @@ int AuxiliaryMethods::convertStringToInt(string word)
     return intNumber;
 }
 
-string AuxiliaryMethods::getCurrentData() {
-    stringstream data;
-
-    const auto& givemetime = chrono::system_clock::to_time_t(chrono::system_clock::now());
-    data << put_time(localtime(&givemetime), "%Y-%m-%d");
-
-    return data.str();
+string AuxiliaryMethods::convertFloatToString(double number) {
+    ostringstream ss;
+    ss << number;
+    string str = ss.str();
+    return str;
 }
 
-int AuxiliaryMethods::convertStringDataToIntWithoutDashes(string data) {
-    for (int i = 0; i < (int)data.length(); i++) {
-        if (data[i] == '-') {
-            data.erase(i, 1);
+string AuxiliaryMethods::getCurrentDate() {
+    stringstream date;
+
+    const auto& givemetime = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    date << put_time(localtime(&givemetime), "%Y-%m-%d");
+
+    return date.str();
+}
+
+int AuxiliaryMethods::convertStringDateToIntWithoutDashes(string date) {
+    for (int i = 0; i < (int)date.length(); i++) {
+        if (date[i] == '-') {
+            date.erase(i, 1);
             i --;
         }
     }
-    return convertStringToInt(data);
+    return convertStringToInt(date);
+}
+
+string AuxiliaryMethods::convertIntDateToStringWithDashes(int date) {
+    string stringDate = convertIntToString(date);
+
+    stringDate = stringDate.insert(4, "-");
+    stringDate = stringDate.insert(7, "-");
+
+    return stringDate;
 }
 
 /*int AuxiliaryMethods::specifyNumberOfDaysInMotnh(int month) {
@@ -119,9 +135,9 @@ bool AuxiliaryMethods::checkIfDateIsCorrect(string data) {
     int month = convertStringToInt(data.substr(5, 2));
     int day = convertStringToInt(data.substr(8, 2));
 
-    string currentData = getCurrentData();
-    int currentYear = convertStringToInt(currentData.substr(0, 4));
-    int currentMonth = convertStringToInt(currentData.substr(5, 2));
+    string currentDate = getCurrentDate();
+    int currentYear = convertStringToInt(currentDate.substr(0, 4));
+    int currentMonth = convertStringToInt(currentDate.substr(5, 2));
     //int maxDayInCurrentMotnh = specifyNumberOfDaysInMotnh(currentMonth);
 
     if (year < 2000 || year > currentYear)

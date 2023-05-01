@@ -3,36 +3,37 @@
 Income TransactionManager::getNewIncomeData() {
     Income income;
 
-    income.setAmountId(/*fileWithIncomes.getNewIncomeId()*/ + 1);
+    income.setAmountId(fileWithIncomes.getLastIncomeId() + 1);
     income.setUserId(ID_OF_LOGGED_IN_USER);
 
     cout << "Czy przychod ktory chcesz dodac dotyczy dnia dzisiejszego?" << endl;
     cout << "Potwierdz naciskajac klawisz 't': ";
         if (getch() == 't') {
-            string data;
+            string date;
 
-            data = AuxiliaryMethods::getCurrentData();
-            income.setData(AuxiliaryMethods::convertStringDataToIntWithoutDashes(data));
+            date = AuxiliaryMethods::getCurrentDate();
+            income.setDate(AuxiliaryMethods::convertStringDateToIntWithoutDashes(date));
+            cout << endl << "Dzisiejsza data zostala pobrana." << endl;
         }
         else {
-            string data;
+            string date;
 
             cout << endl << "Podaj date (yyyy-mm-dd): ";
-            data = AuxiliaryMethods::loadLine();
+            date = AuxiliaryMethods::loadLine();
 
             while (true) {
-                if (AuxiliaryMethods::checkIfDateIsCorrect(data)) {
-                    income.setData(AuxiliaryMethods::convertStringDataToIntWithoutDashes(data));
+                if (AuxiliaryMethods::checkIfDateIsCorrect(date)) {
+                    income.setDate(AuxiliaryMethods::convertStringDateToIntWithoutDashes(date));
                     break;
                 }
                 else {
                     cout << "Wprowadzona data jest nieprawidlowa. Wprowadz date ponownie (yyyy-mm-dd): ";
-                    data = AuxiliaryMethods::loadLine();
+                    date = AuxiliaryMethods::loadLine();
                 }
             }
         }
 
-    cout << endl << "Podaj zrodlo przychodu: ";
+    cout << "Podaj zrodlo przychodu: ";
     income.setItem(AuxiliaryMethods::loadLine());
 
     cout << "Podaj wartosc: ";
@@ -49,10 +50,11 @@ void TransactionManager::addIncome() {
     income = getNewIncomeData();
 
     incomes.push_back(income);
-    if (/*fileWithIncomes.addIncomeToFile(income)*/1)
+    if (fileWithIncomes.addIncomeToFile(income))
         cout << endl << "Nowy przychod zostal dodany" << endl;
     else
         cout << endl << "Blad. Nie udalo sie dodac nowego adresata do pliku." << endl;
-    cout << income.getAmountId() << income.getUserId() << income.getData() << income.getItem() << income.getValue() << endl;
+    //test
+    cout << income.getAmountId() << income.getUserId() << income.getDate() << income.getItem() << income.getValue() << endl;
     system("pause");
 }

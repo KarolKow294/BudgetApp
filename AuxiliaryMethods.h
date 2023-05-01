@@ -18,10 +18,12 @@ public:
     static double loadFloatNumber();
     static string convertIntToString(int number);
     static int convertStringToInt(string word);
-    static string getCurrentData();
-    static int convertStringDataToIntWithoutDashes(string data);
-    static int specifyNumberOfDaysInMotnh(int month);
-    static bool checkIfDateIsCorrect(string data);
+    static string convertFloatToString(double number);
+    static string getCurrentDate();
+    static int convertStringDateToIntWithoutDashes(string date);
+    static string convertIntDateToStringWithDashes(int date);
+    //static int specifyNumberOfDaysInMotnh(int month);
+    static bool checkIfDateIsCorrect(string date);
 };
 
 #endif

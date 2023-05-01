@@ -31,13 +31,13 @@ User FileWithUsers::getUserData() {
     xml.FindElem("Id");
     user.setId(atoi(MCD_2PCSZ(xml.GetData())));
     xml.FindElem("Name");
-    user.setName((MCD_2PCSZ(xml.GetData())));
+    user.setName(MCD_2PCSZ(xml.GetData()));
     xml.FindElem("Surname");
-    user.setSurname((MCD_2PCSZ(xml.GetData())));
+    user.setSurname(MCD_2PCSZ(xml.GetData()));
     xml.FindElem("Login");
-    user.setLogin((MCD_2PCSZ(xml.GetData())));
+    user.setLogin(MCD_2PCSZ(xml.GetData()));
     xml.FindElem("Password");
-    user.setPassword((MCD_2PCSZ(xml.GetData())));
+    user.setPassword(MCD_2PCSZ(xml.GetData()));
     xml.OutOfElem();
 
     return user;
