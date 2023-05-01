@@ -43,8 +43,7 @@ bool checkIfTheFirstDateIsOlder(Date firstDate, Date secondDate) {
 
 int main()
 {
-    BudgetApp budgetApp("Users.xml");
-    //"Users.xml", "Incomes.xml", "Expenses.xml"
+    BudgetApp budgetApp("Users.xml", "Incomes.xml", "Expenses.xml");
 
     while (true)
     {
