@@ -17,8 +17,8 @@ void Amount::setItem(string newItem) {
     item = newItem;
 }
 
-void Amount::setValue(double newValue) {
-    value = newValue;
+void Amount::setAmount(double newAmount) {
+    amount = newAmount;
 }
 
 int Amount::getAmountId() {
@@ -37,6 +37,6 @@ string Amount::getItem() {
     return item;
 }
 
-double Amount::getValue() {
-    return value;
+double Amount::getAmount() {
+    return amount;
 }

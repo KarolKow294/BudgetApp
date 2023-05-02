@@ -52,7 +52,7 @@ double AuxiliaryMethods::loadFloatNumber() {
         cin.sync();
         getline(cin, input);
 
-        if (number = atof(input.c_str()))
+        if ( (number = atof(input.c_str())) )
             break;
         cout << "To nie jest liczba. Wpisz ponownie. " << endl;
     }
@@ -110,7 +110,7 @@ string AuxiliaryMethods::convertIntDateToStringWithDashes(int date) {
     return stringDate;
 }
 
-/*int AuxiliaryMethods::specifyNumberOfDaysInMotnh(int month) {
+int AuxiliaryMethods::specifyNumberOfDaysInMonth(int year, int month) {
     int numberOfDaysInTheCurrentMonth = 0;
 
     if (month == 4 || month == 6 || month == 9 || month == 11)
@@ -128,17 +128,19 @@ string AuxiliaryMethods::convertIntDateToStringWithDashes(int date) {
         numberOfDaysInTheCurrentMonth = 31;
 
     return numberOfDaysInTheCurrentMonth;
-}*/
+}
 
-bool AuxiliaryMethods::checkIfDateIsCorrect(string data) {
-    int year = convertStringToInt(data.substr(0, 4));
-    int month = convertStringToInt(data.substr(5, 2));
-    int day = convertStringToInt(data.substr(8, 2));
+bool AuxiliaryMethods::checkIfDateIsCorrect(string date) {
+    if (!isdigit(date[0]) || date[4] != '-' || date[7] != '-')
+        return false;
+
+    int year = convertStringToInt(date.substr(0, 4));
+    int month = convertStringToInt(date.substr(5, 2));
+    int day = convertStringToInt(date.substr(8, 2));
 
     string currentDate = getCurrentDate();
     int currentYear = convertStringToInt(currentDate.substr(0, 4));
     int currentMonth = convertStringToInt(currentDate.substr(5, 2));
-    //int maxDayInCurrentMotnh = specifyNumberOfDaysInMotnh(currentMonth);
 
     if (year < 2000 || year > currentYear)
         return false;

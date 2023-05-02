@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <conio.h>
+#include <algorithm>
+#include <string>
 
 #include "Income.h"
 #include "Expense.h"
@@ -20,12 +22,14 @@ class TransactionManager {
     FileWithIncomes fileWithIncomes;
     FileWithExpenses fileWithExpenses;
 
+    int loadDate();
     Income getNewIncomeData();
     Expense getNewExpenseData();
+    void showBalance(int startDate, int endDate);
 
 public:
-    TransactionManager(string fileNameWithIncomes, string fileNameWithExpenses, int idOfLoggedInUser)
-        : fileWithIncomes(fileNameWithIncomes), fileWithExpenses(fileNameWithExpenses), ID_OF_LOGGED_IN_USER(idOfLoggedInUser)
+    TransactionManager(int idOfLoggedInUser, string fileNameWithIncomes, string fileNameWithExpenses)
+        : ID_OF_LOGGED_IN_USER(idOfLoggedInUser), fileWithIncomes(fileNameWithIncomes), fileWithExpenses(fileNameWithExpenses)
     {
         incomes = fileWithIncomes.loadLoggedUserIncomesFromFile(ID_OF_LOGGED_IN_USER);
         expenses = fileWithExpenses.loadLoggedUserExpensesFromFile(ID_OF_LOGGED_IN_USER);
@@ -33,6 +37,9 @@ public:
 
     void addIncome();
     void addExpense();
+    void showCurrentMonthBalance();
+    void showLastMonthBalance();
+    void showSelectedPeriodBalance();
 };
 
 #endif

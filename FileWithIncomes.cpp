@@ -21,7 +21,7 @@ bool FileWithIncomes::addIncomeToFile(Income income) {
     xml.AddElem("UserId", income.getUserId());
     xml.AddElem("Date", date);
     xml.AddElem("Item", income.getItem());
-    xml.AddElem("Value", AuxiliaryMethods::convertFloatToString(income.getValue()));
+    xml.AddElem("Amount", AuxiliaryMethods::convertFloatToString(income.getAmount()));
 
     if (!xml.Save(FILE_NAME)) {
         return false;
@@ -43,8 +43,8 @@ Income FileWithIncomes::getIncomeData() {
     income.setDate(AuxiliaryMethods::convertStringDateToIntWithoutDashes(MCD_2PCSZ(xml.GetData())));
     xml.FindElem("Item");
     income.setItem(MCD_2PCSZ(xml.GetData()));
-    xml.FindElem("Value");
-    income.setValue(atof(MCD_2PCSZ(xml.GetData())));
+    xml.FindElem("Amount");
+    income.setAmount(atof(MCD_2PCSZ(xml.GetData())));
     xml.OutOfElem();
 
     return income;
@@ -68,11 +68,6 @@ vector <Income> FileWithIncomes::loadLoggedUserIncomesFromFile(int idOfLoggedInU
                 lastIncomeId = income.getAmountId();
             }
         }
-        //test
-        for (auto& v : incomes) {
-            cout << v.getAmountId() << v.getUserId() << v.getDate() << v.getItem() << v.getValue() << endl;
-        }
-        system("pause");
     }
     return incomes;
 }

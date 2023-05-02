@@ -21,7 +21,7 @@ bool FileWithExpenses::addExpenseToFile(Expense expense) {
     xml.AddElem("UserId", expense.getUserId());
     xml.AddElem("Date", date);
     xml.AddElem("Item", expense.getItem());
-    xml.AddElem("Value", AuxiliaryMethods::convertFloatToString(expense.getValue()));
+    xml.AddElem("Amount", AuxiliaryMethods::convertFloatToString(expense.getAmount()));
 
     if (!xml.Save(FILE_NAME)) {
         return false;
@@ -43,8 +43,8 @@ Expense FileWithExpenses::getExpenseData() {
     expense.setDate(AuxiliaryMethods::convertStringDateToIntWithoutDashes(MCD_2PCSZ(xml.GetData())));
     xml.FindElem("Item");
     expense.setItem(MCD_2PCSZ(xml.GetData()));
-    xml.FindElem("Value");
-    expense.setValue(atof(MCD_2PCSZ(xml.GetData())));
+    xml.FindElem("Amount");
+    expense.setAmount(atof(MCD_2PCSZ(xml.GetData())));
     xml.OutOfElem();
 
     return expense;
@@ -68,11 +68,6 @@ vector <Expense> FileWithExpenses::loadLoggedUserExpensesFromFile(int idOfLogged
                 lastExpenseId = expense.getAmountId();
             }
         }
-        //test
-        for (auto& v : expenses) {
-            cout << v.getAmountId() << v.getUserId() << v.getDate() << v.getItem() << v.getValue() << endl;
-        }
-        system("pause");
     }
     return expenses;
 }

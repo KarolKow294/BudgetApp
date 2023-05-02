@@ -1,5 +1,20 @@
 #include "TransactionManager.h"
 
+int TransactionManager::loadDate() {
+   string date;
+
+   while (true) {
+        date = AuxiliaryMethods::loadLine();
+
+        if (AuxiliaryMethods::checkIfDateIsCorrect(date)) {
+            return AuxiliaryMethods::convertStringDateToIntWithoutDashes(date);
+        }
+        else {
+            cout << "Wprowadzona data jest nieprawidlowa. Wprowadz date ponownie (yyyy-mm-dd): ";
+        }
+    }
+}
+
 Income TransactionManager::getNewIncomeData() {
     Income income;
 
@@ -16,28 +31,15 @@ Income TransactionManager::getNewIncomeData() {
             cout << endl << "Dzisiejsza data zostala pobrana." << endl;
         }
         else {
-            string date;
-
             cout << endl << "Podaj date (yyyy-mm-dd): ";
-            date = AuxiliaryMethods::loadLine();
-
-            while (true) {
-                if (AuxiliaryMethods::checkIfDateIsCorrect(date)) {
-                    income.setDate(AuxiliaryMethods::convertStringDateToIntWithoutDashes(date));
-                    break;
-                }
-                else {
-                    cout << "Wprowadzona data jest nieprawidlowa. Wprowadz date ponownie (yyyy-mm-dd): ";
-                    date = AuxiliaryMethods::loadLine();
-                }
-            }
+            income.setDate(loadDate());
         }
 
     cout << "Podaj zrodlo przychodu: ";
     income.setItem(AuxiliaryMethods::loadLine());
 
     cout << "Podaj wartosc: ";
-    income.setValue(AuxiliaryMethods::loadFloatNumber());
+    income.setAmount(AuxiliaryMethods::loadFloatNumber());
 
     return income;
 }
@@ -58,28 +60,15 @@ Expense TransactionManager::getNewExpenseData() {
             cout << endl << "Dzisiejsza data zostala pobrana." << endl;
         }
         else {
-            string date;
-
             cout << endl << "Podaj date (yyyy-mm-dd): ";
-            date = AuxiliaryMethods::loadLine();
-
-            while (true) {
-                if (AuxiliaryMethods::checkIfDateIsCorrect(date)) {
-                    expense.setDate(AuxiliaryMethods::convertStringDateToIntWithoutDashes(date));
-                    break;
-                }
-                else {
-                    cout << "Wprowadzona data jest nieprawidlowa. Wprowadz date ponownie (yyyy-mm-dd): ";
-                    date = AuxiliaryMethods::loadLine();
-                }
-            }
+            expense.setDate(loadDate());
         }
 
     cout << "Podaj cel wydatku: ";
     expense.setItem(AuxiliaryMethods::loadLine());
 
     cout << "Podaj wartosc: ";
-    expense.setValue(AuxiliaryMethods::loadFloatNumber());
+    expense.setAmount(AuxiliaryMethods::loadFloatNumber());
 
     return expense;
 }
@@ -96,8 +85,6 @@ void TransactionManager::addIncome() {
         cout << endl << "Nowy przychod zostal dodany" << endl;
     else
         cout << endl << "Blad. Nie udalo sie dodac nowego przychodu do pliku." << endl;
-    //test
-    cout << income.getAmountId() << income.getUserId() << income.getDate() << income.getItem() << income.getValue() << endl;
     system("pause");
 }
 
@@ -113,7 +100,92 @@ void TransactionManager::addExpense() {
         cout << endl << "Nowy wydatek zostal dodany" << endl;
     else
         cout << endl << "Blad. Nie udalo sie dodac nowego wydatku do pliku." << endl;
-    //test
-    cout << expense.getAmountId() << expense.getUserId() << expense.getDate() << expense.getItem() << expense.getValue() << endl;
     system("pause");
+}
+
+void TransactionManager::showBalance(int startDate, int endDate) {
+    double totalIncomes = 0;
+    double totalExpenses = 0;
+
+    sort(incomes.begin(), incomes.end());
+    sort(expenses.begin(), expenses.end());
+
+    system("cls");
+    cout << " >>> Lista przychodow <<<" << endl << endl;
+    for (auto& v : incomes) {
+        if (v.getDate() >= startDate && v.getDate() <= endDate){
+            cout << "Data:    " << AuxiliaryMethods::convertIntDateToStringWithDashes(v.getDate()) << endl;
+            cout << "Zrodlo:  " << v.getItem() << endl;
+            cout << "Wartosc: " << v.getAmount() << endl << endl;
+            totalIncomes += v.getAmount();
+        }
+    }
+
+    cout << " >>> Lista wydatkow <<<" << endl << endl;
+    for (auto& v : expenses) {
+        if (v.getDate() >= startDate && v.getDate() <= endDate){
+            cout << "Data:    " << AuxiliaryMethods::convertIntDateToStringWithDashes(v.getDate()) << endl;
+            cout << "Cel:     " << v.getItem() << endl;
+            cout << "Wartosc: " << v.getAmount() << endl << endl;
+            totalExpenses += v.getAmount();
+        }
+    }
+
+    cout << "Suma przychodow: " << totalIncomes << endl;
+    cout << "Suma wydatkow:   " << totalExpenses << endl;
+    cout << "Bilans           " << totalIncomes - totalExpenses << endl;
+    system("pause");
+}
+
+void TransactionManager::showCurrentMonthBalance() {
+    string currentDate = AuxiliaryMethods::getCurrentDate();
+    int currentYear = AuxiliaryMethods::convertStringToInt(currentDate.substr(0, 4));
+    int currentMonth = AuxiliaryMethods::convertStringToInt(currentDate.substr(5, 2));
+    int maxDaysInCurrentMonth = AuxiliaryMethods::specifyNumberOfDaysInMonth(currentYear, currentMonth);
+
+    int startDate = currentYear * 10000 + currentMonth * 100 + 1;
+    int endDate = currentYear * 10000 + currentMonth * 100 + maxDaysInCurrentMonth;
+
+    showBalance(startDate, endDate);
+}
+
+void TransactionManager::showLastMonthBalance() {
+    string currentDate = AuxiliaryMethods::getCurrentDate();
+    int currentYear = AuxiliaryMethods::convertStringToInt(currentDate.substr(0, 4));
+    int currentMonth = AuxiliaryMethods::convertStringToInt(currentDate.substr(5, 2));
+
+    int lastMonthYear, lastMonth, maxDaysInLastMonth;
+
+    if (currentMonth == 1) {
+        lastMonthYear = currentYear - 1;
+        lastMonth = 12;
+    }
+    else {
+        lastMonthYear = currentYear;
+        lastMonth = currentMonth - 1;
+    }
+
+    maxDaysInLastMonth = AuxiliaryMethods::specifyNumberOfDaysInMonth(lastMonthYear, lastMonth);
+
+    int startDate = lastMonthYear * 10000 + lastMonth * 100 + 1;
+    int endDate = lastMonthYear * 10000 + lastMonth * 100 + maxDaysInLastMonth;
+
+    showBalance(startDate, endDate);
+}
+
+void TransactionManager::showSelectedPeriodBalance() {
+    int startDate, endDate;
+
+    cout << "Podaj date od ktorej wyswietlic bilans przychod i wydatkow (yyyy-mm-dd): ";
+    startDate = loadDate();
+
+    cout << "Podaj date do ktorej wyswietlic bilans przychod i wydatkow (yyyy-mm-dd): ";
+    endDate = loadDate();
+
+    if (startDate <= endDate)
+        showBalance(startDate, endDate);
+    else {
+        cout << endl << "Nie udalo sie pokazac bilansu. Data poczatkowa jest wieksza od daty koncowej." << endl;
+        system("pause");
+    }
 }

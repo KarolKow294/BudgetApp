@@ -10,20 +10,24 @@ class Amount {
     int userId;
     int date;
     string item;
-    double value;
+    double amount;
 
 public:
+    bool operator < (Amount &str) {
+        return (date < str.date);
+    }
+
     void setAmountId(int newAmountId);
     void setUserId(int newUserId);
     void setDate(int newDate);
     void setItem(string newItem);
-    void setValue(double newValue);
+    void setAmount(double newAmount);
 
     int getAmountId();
     int getUserId();
     int getDate();
     string getItem();
-    double getValue();
+    double getAmount();
 };
 
 #endif

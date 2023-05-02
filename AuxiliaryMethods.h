@@ -22,7 +22,7 @@ public:
     static string getCurrentDate();
     static int convertStringDateToIntWithoutDashes(string date);
     static string convertIntDateToStringWithDashes(int date);
-    //static int specifyNumberOfDaysInMotnh(int month);
+    static int specifyNumberOfDaysInMonth(int year, int month);
     static bool checkIfDateIsCorrect(string date);
 };
 
