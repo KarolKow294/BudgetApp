@@ -14,7 +14,6 @@ protected:
 
 public:
     XmlFile(string fileName) : FILE_NAME(fileName) {};
-    bool isFileEmpty();
 };
 
 #endif

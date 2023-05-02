@@ -110,3 +110,7 @@ bool UserManager::checkIfUserIsLoggedIn() {
 void UserManager::logOutUser() {
     loggedInUserId = 0;
 }
+
+int UserManager::getLoggedInUserId() {
+    return loggedInUserId;
+}
