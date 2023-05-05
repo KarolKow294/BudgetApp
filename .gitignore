@@ -1,7 +1,6 @@
 bin/
 obj/
 plan/
-BudgetApp.*
 users.xml
 incomes.xml
 expenses.xml
